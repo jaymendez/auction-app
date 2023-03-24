@@ -37,7 +37,7 @@ const Login = ({ toggleLogin, toggleRegisterForm }: LoginFormProps) => {
             return [...prev, error];
           }),
         onSuccess: ({ data }: any) => {
-          setUser(data.data);
+          setUser(data.user);
           toggleLogin(false);
         },
       }

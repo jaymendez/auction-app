@@ -4,10 +4,11 @@ const fetchLots = async (props: any) => {
   try {
     let params = {};
     const [user, filter] = props.queryKey;
+
     if (filter.fetchType === "personal") {
       params = {
         ...params,
-        userId: user._id,
+        userId: user?._id,
       };
     }
     const res = await axios.get(`/lots`, { params });
