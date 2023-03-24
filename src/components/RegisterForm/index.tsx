@@ -37,17 +37,30 @@ const RegisterForm = ({
       }
       return;
     }
-    registerMutation({
-      email,
-      password,
-    });
-    setErrors([]);
-    toggleRegisterForm(false);
-    toast({
-      title: "Congratulations! 🎉",
-      message: "You have created an account.",
-      type: "success",
-    });
+    registerMutation(
+      {
+        email,
+        password,
+      },
+      {
+        onSuccess: () => {
+          setErrors([]);
+          toggleRegisterForm(false);
+          toast({
+            title: "Congratulations! 🎉",
+            message: "You have created an account.",
+            type: "success",
+          });
+        },
+        onError: (error) =>
+          setErrors((prev) => {
+            if (prev.includes(error as string)) {
+              return prev;
+            }
+            return [...prev, error as string];
+          }),
+      }
+    );
   };
 
   return (
