@@ -1,30 +1,58 @@
+import { ILot, IUser, TAuthUser } from "@/types";
 import { AxiosResponse } from "axios";
-import { UseMutateFunction } from "react-query";
-
-export type TUser = {
-  email: string;
-  password: string;
-};
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+  UseMutateFunction,
+} from "react-query";
 
 type TAuthMutation = UseMutateFunction<
   AxiosResponse<any, any> | never[],
   unknown,
-  { email: string; password: string },
+  TAuthUser,
   unknown
 >;
 
 export type UserProviderState = {
   user: any; // Add user type
+  setUser: (newUser: any) => void;
   loginMutation: TAuthMutation;
   logoutMutation: TAuthMutation;
   registerMutation: TAuthMutation;
+  updateUserMutation: UseMutateFunction<
+    AxiosResponse<any, any> | never[],
+    unknown,
+    {
+      userId: string;
+      body: Partial<IUser>;
+    },
+    unknown
+  >;
+  refetchUser: unknown;
+  createLotMutation: UseMutateFunction<
+    AxiosResponse<any, any> | never[],
+    unknown,
+    Omit<ILot, "status" | "bids" | "_id">,
+    unknown
+  >;
+  refetchLots?: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<any, unknown>>;
+  setRefetchLots: (refetch: any) => void;
 };
 
 export const userInitialState: UserProviderState = {
   user: null,
+  setUser: () => null,
   loginMutation: () => null,
   logoutMutation: () => null,
   registerMutation: () => null,
+  updateUserMutation: () => null,
+  refetchUser: () => null,
+  createLotMutation: () => null,
+  refetchLots: undefined,
+  setRefetchLots: (fn: any) => null,
 };
 
 export type UserAction =
@@ -35,6 +63,10 @@ export type UserAction =
   | {
       type: "CLEAR_USER";
       user: null;
+    }
+  | {
+      type: "SET_REFETCH_LOTS";
+      refetch: UserProviderState["refetchLots"];
     };
 
 const userReducer = (
@@ -51,6 +83,12 @@ const userReducer = (
       return {
         ...state,
         user: null,
+      };
+    }
+    case "SET_REFETCH_LOTS": {
+      return {
+        ...state,
+        refetchLots: action?.refetch,
       };
     }
     default:

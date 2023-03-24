@@ -11,11 +11,19 @@ export interface ILot {
   _id: string;
   name: string;
   userId: string;
-  bids: TBid[];
+  bids: TTransaction[];
   startingPrice: number;
   status: string;
   auctionTime: AuctionTime;
 }
+
+export type TTransaction = {
+  _id: string;
+  userId: string;
+  lotId: string;
+  transactionAmount: number;
+  status: string;
+};
 
 export type TBid = {
   userId: string;

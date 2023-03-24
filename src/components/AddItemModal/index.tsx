@@ -4,7 +4,7 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import moment from "moment";
 import { useTheme } from "next-themes";
-import { FormEvent, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 
 import { useUserContext } from "@/context/UserContext";
 import { ModalProps } from "@/types";
@@ -25,57 +25,79 @@ interface FormData {
 
 const AddItemModal = ({ isOpen, toggleModal }: AddItemModalProps) => {
   const { theme: applicationTheme } = useTheme();
-  const { createLotMutation } = useUserContext();
+  const { createLotMutation, user } = useUserContext();
 
   const [startDate, setStartDate] = useState<moment.Moment>(moment());
   const [endDate, setEndDate] = useState<moment.Moment | null>(moment());
   const [errors, setErrors] = useState<string[]>([]);
-  console.log(startDate, endDate);
+
   const darkTheme = createTheme({
     palette: {
       mode: applicationTheme === "light" ? "light" : "dark",
     },
   });
+
   const submitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { name, startingPrice } = e.target as typeof e.target & FormData;
+    if (errors.length === 0) {
+      createLotMutation({
+        name: name.value,
+        userId: user._id,
+        startingPrice: parseFloat(startingPrice.value),
+        auctionTime: {
+          startTime: (startDate as moment.Moment).toISOString(),
+          endTime: (endDate as moment.Moment).toISOString(),
+        },
+      });
+
+      toast({
+        title: "Congratulations! 🎉",
+        message: `You have created ${name.value}.`,
+        type: "success",
+      });
+      toggleModal(false);
+    }
+  };
+
+  const validateForm = useCallback(() => {
     if (isEmpty(startDate)) {
       const reqError = "Start date should not be empty";
-      if (!errors.includes(reqError)) {
-        setErrors((prev) => [...prev, reqError]);
-        return;
-      }
+      setErrors((prev) => {
+        if (prev.includes(reqError)) {
+          return prev;
+        }
+        return [...prev, reqError];
+      });
+      return;
     }
     if (isEmpty(endDate)) {
       const reqError = "End date should not be empty";
-      if (!errors.includes(reqError)) {
-        setErrors((prev) => [...prev, reqError]);
-        return;
-      }
+      setErrors((prev) => {
+        if (prev.includes(reqError)) {
+          return prev;
+        }
+        return [...prev, reqError];
+      });
+      return;
     }
-    if (endDate?.diff(startDate)) {
+    console.log(endDate?.diff(startDate));
+    if (endDate?.diff(startDate) <= 0) {
       const gtError = "End date should be greater than start date";
-      if (!errors.includes(gtError)) {
-        setErrors((prev) => [...prev, gtError]);
-        return;
-      }
+      setErrors((prev) => {
+        if (prev.includes(gtError)) {
+          return prev;
+        }
+        return [...prev, gtError];
+      });
+      return;
     }
-    createLotMutation({
-      name: name.value,
-      startingPrice: parseFloat(startingPrice.value),
-      auctionTime: {
-        startTime: (startDate as moment.Moment).toISOString(),
-        endTime: (endDate as moment.Moment).toISOString(),
-      },
-    });
+    setErrors([]);
+  }, [endDate, startDate]);
 
-    toast({
-      title: "Congratulations! 🎉",
-      message: `You have created ${name.value}.`,
-      type: "success",
-    });
-    toggleModal(false);
-  };
+  useEffect(() => {
+    validateForm();
+  }, [validateForm, endDate, startDate]);
 
   return (
     <CustomModal isOpen={isOpen} onClose={() => toggleModal(false)}>
@@ -110,7 +132,7 @@ const AddItemModal = ({ isOpen, toggleModal }: AddItemModalProps) => {
             <div className="space-y-1.5">
               <Label htmlFor="startingPrice">Start Date</Label>
               <DateTimePicker
-                onChange={(v) => setStartDate(v)}
+                onChange={(v) => v && setStartDate(v)}
                 value={startDate}
                 sx={{ width: "100%" }}
                 disablePast

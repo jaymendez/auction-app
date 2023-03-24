@@ -13,7 +13,7 @@ const login = async ({
     });
     return res;
   } catch (err: any) {
-    throw new Error(err?.toString());
+    throw err?.response?.data?.message || "Invalid Login Credentials";
   }
 };
 

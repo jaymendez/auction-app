@@ -5,12 +5,14 @@ const createLot = async ({
   name,
   startingPrice,
   auctionTime,
-}: Omit<ILot, "userId" | "bids" | "status" | "_id">) => {
+  userId,
+}: Omit<ILot, "bids" | "status" | "_id">) => {
   try {
     const res = await axios.post(`/lots`, {
       name,
       startingPrice,
       auctionTime,
+      userId,
     });
     return res;
   } catch (err: any) {

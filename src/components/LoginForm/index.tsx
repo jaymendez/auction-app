@@ -6,6 +6,7 @@ import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import Label from "@/components/Label";
 import { useUserContext } from "@/context/UserContext";
+import FormErrors from "../FormErrors";
 
 type LoginFormProps = {
   toggleLogin: (bool: boolean) => void;
@@ -14,7 +15,7 @@ type LoginFormProps = {
 
 const Login = ({ toggleLogin, toggleRegisterForm }: LoginFormProps) => {
   const router = useRouter();
-  const { loginMutation } = useUserContext();
+  const { loginMutation, setUser } = useUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<any>([]);
@@ -22,11 +23,25 @@ const Login = ({ toggleLogin, toggleRegisterForm }: LoginFormProps) => {
   const submitForm = async (event: FormEvent) => {
     event.preventDefault();
 
-    loginMutation({
-      email,
-      password,
-    });
-    toggleLogin(false);
+    loginMutation(
+      {
+        email,
+        password,
+      },
+      {
+        onError: (error) =>
+          setErrors((prev: string[]) => {
+            if (prev.includes(error as string)) {
+              return prev;
+            }
+            return [...prev, error];
+          }),
+        onSuccess: ({ data }: any) => {
+          setUser(data.data);
+          toggleLogin(false);
+        },
+      }
+    );
   };
 
   return (
@@ -69,7 +84,7 @@ const Login = ({ toggleLogin, toggleRegisterForm }: LoginFormProps) => {
 
           {/* <InputError messages={errors?.password} className="mt-2" /> */}
         </div>
-
+        <FormErrors errors={errors} />
         <div className="mt-4 flex items-center justify-end space-x-3">
           <Button
             variant="link"

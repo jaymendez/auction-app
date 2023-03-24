@@ -15,7 +15,6 @@ if (token) {
   headers.Authorization = token;
 }
 
-console.log(token);
 export default axios.create({
   baseURL,
   headers,

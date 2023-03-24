@@ -1,8 +1,16 @@
 import axios from "@/lib/axios";
 
-const fetchLots = async () => {
+const fetchLots = async (props: any) => {
   try {
-    const res = await axios.get(`/lots`);
+    let params = {};
+    const [user, filter] = props.queryKey;
+    if (filter.fetchType === "personal") {
+      params = {
+        ...params,
+        userId: user._id,
+      };
+    }
+    const res = await axios.get(`/lots`, { params });
     return res;
   } catch (err: any) {
     if (err?.message === "Request failed with status code 404") return [];

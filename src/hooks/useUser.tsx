@@ -17,12 +17,7 @@ export const useUser = (): UserProviderState => {
   // const [authCookie, updateCookie, deleteCookie] = useCookie("Authorization");
   // const [value, setValue, remove] = useLocal Storage("auction-user", "");
 
-  const { mutate: loginMutation } = useMutation(login, {
-    onSuccess: ({ data }) => {
-      setUser(data.data);
-      // setUser(data)
-    },
-  });
+  const { mutate: loginMutation } = useMutation(login);
 
   const { mutate: logoutMutation } = useMutation(logout, {
     onSuccess: () => {
@@ -37,7 +32,12 @@ export const useUser = (): UserProviderState => {
 
   const { data: currentUser, refetch: refetchUser } = useQuery(
     [],
-    fetchCurrentUser
+    fetchCurrentUser,
+    {
+      onError: (err) => {
+        setUser(null);
+      },
+    }
   );
 
   const { mutate: updateUserMutation } = useMutation(updateUser, {
@@ -45,13 +45,22 @@ export const useUser = (): UserProviderState => {
   });
 
   const { mutate: createLotMutation } = useMutation(createLot, {
-    onSuccess: () => {},
+    onSuccess: () => {
+      state.refetchLots?.();
+    },
   });
 
   const setUser = useCallback((newUser: any) => {
     dispatch({
       type: "SET_USER",
       user: newUser,
+    });
+  }, []);
+
+  const setRefetchLots = useCallback((refetch: any) => {
+    dispatch({
+      type: "SET_REFETCH_LOTS",
+      refetch,
     });
   }, []);
 
@@ -76,5 +85,7 @@ export const useUser = (): UserProviderState => {
     updateUserMutation,
     refetchUser,
     createLotMutation,
+    setRefetchLots,
+    setUser,
   };
 };
