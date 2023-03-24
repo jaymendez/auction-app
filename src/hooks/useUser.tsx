@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useReducer } from "react";
 import { useMutation, useQuery } from "react-query";
 
+import createLot from "@/api/lot/createLot";
 import createUser from "@/api/user/createUser";
 import fetchCurrentUser from "@/api/user/fetchCurrentUser";
 import login from "@/api/user/login";
 import logout from "@/api/user/logout";
+import updateUser from "@/api/user/updateUser";
 import userReducer, {
   userInitialState,
   UserProviderState,
@@ -33,7 +35,18 @@ export const useUser = (): UserProviderState => {
     onSuccess: () => {},
   });
 
-  const { data: currentUser } = useQuery([], fetchCurrentUser);
+  const { data: currentUser, refetch: refetchUser } = useQuery(
+    [],
+    fetchCurrentUser
+  );
+
+  const { mutate: updateUserMutation } = useMutation(updateUser, {
+    onSuccess: () => refetchUser(),
+  });
+
+  const { mutate: createLotMutation } = useMutation(createLot, {
+    onSuccess: () => {},
+  });
 
   const setUser = useCallback((newUser: any) => {
     dispatch({
@@ -60,5 +73,8 @@ export const useUser = (): UserProviderState => {
     loginMutation,
     logoutMutation,
     registerMutation,
+    updateUserMutation,
+    refetchUser,
+    createLotMutation,
   };
 };

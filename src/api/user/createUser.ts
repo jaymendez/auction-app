@@ -1,12 +1,7 @@
 import axios from "@/lib/axios";
+import { TAuthUser } from "@/types";
 
-const createUser = async ({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) => {
+const createUser = async ({ email, password }: TAuthUser) => {
   try {
     const res = await axios.post(`/users`, {
       email,

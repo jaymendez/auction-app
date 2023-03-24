@@ -1,12 +1,7 @@
 import axios from "@/lib/axios";
+import { TAuthUser } from "@/types";
 
-const logout = async ({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) => {
+const logout = async ({ email, password }: TAuthUser) => {
   try {
     const res = await axios.post(`/logout`, {
       email,

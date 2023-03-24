@@ -10,7 +10,11 @@ const SignOutButton = () => {
   };
 
   return (
-    <Button variant="ghost" onClick={handleSignOut} className="w-full">
+    <Button
+      variant="ghost"
+      onClick={handleSignOut}
+      className="w-full hover:opacity-70"
+    >
       Sign Out
     </Button>
   );

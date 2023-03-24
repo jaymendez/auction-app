@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -7,7 +8,6 @@ import {
   Theme,
 } from "@mui/material";
 import { X as Close } from "lucide-react";
-import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 
 type CustomModalProps = {
@@ -15,15 +15,15 @@ type CustomModalProps = {
   onClose: () => void;
   cardSx?: SxProps<Theme>;
   children: ReactNode;
+  className?: string;
 };
-
-const inter = Inter({ subsets: ["latin"] });
 
 const CustomModal = ({
   isOpen,
   onClose,
   cardSx,
   children,
+  className,
 }: CustomModalProps) => {
   return (
     <Modal
@@ -34,7 +34,6 @@ const CustomModal = ({
           borderRadius: "12px",
         },
       }}
-      className={inter.className}
     >
       <Card
         sx={{
@@ -48,9 +47,9 @@ const CustomModal = ({
           maxHeight: "640px",
           ...cardSx,
         }}
-        className="dark:bg-slate-800 bg-white"
+        className={cn("dark:bg-slate-800 bg-white")}
       >
-        <CardContent sx={{ pt: "50px" }}>
+        <CardContent sx={{ pt: "50px" }} className={cn(className)}>
           {children}
           <IconButton
             className="text-slate-900 dark:text-slate-100"

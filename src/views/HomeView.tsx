@@ -1,10 +1,10 @@
-import Header from "@/layout/Header";
+import LotTable from "@/components/LotTable";
 
 const HomeView = () => {
   return (
-    <>
-      <Header />
-    </>
+    <div className="container mt-20">
+      <LotTable />
+    </div>
   );
 };
 

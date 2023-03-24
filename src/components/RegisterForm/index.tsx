@@ -28,7 +28,6 @@ const RegisterForm = ({
 
   const submitForm = (event: FormEvent) => {
     event.preventDefault();
-    console.log("test");
     if (password !== passwordConfirmation) {
       if (errors.length === 0) {
         setErrors((prevState) => [
@@ -113,7 +112,7 @@ const RegisterForm = ({
           Already registered?
         </Button>
 
-        <Button>Register</Button>
+        <Button type="submit">Register</Button>
       </div>
     </form>
   );
