@@ -77,17 +77,52 @@ Open http://localhost:3000 with your browser to see the result.
 ```
 https://github.com/jaymendez/auction-api
 ```
-End with an example of getting some data out of the system or using it for a little demo.
+This should be the app that you're seeing in your browser:
+![image](https://user-images.githubusercontent.com/28770143/227701984-c25cf085-267a-4f37-aa22-9612058b1fe1.png)
+
 
 ## 🔧 Running the tests <a name = "tests"></a>
-Explain how to run the automated tests for this system.
+The test for the frontend was made with React testing library and Jest
 
-### Break down into end to end tests
-Explain what these tests test and why
+#### Run this command in order to run the tests.
+```
+yarn test
+```
 
-```
-Give an example
-```
+### End to end test for user
+If you managed to install the frontend, backend and created your mongodb instance, you can now try and test the web app.
+
+#### 1. Start by registering an account, click the Sign In button on the upper right corner and then click Register on the modal. We are testing the register functionality here.
+![image](https://user-images.githubusercontent.com/28770143/227702396-9880da0b-3514-4cc2-b826-fb066dbf6338.png)
+
+#### 2. User your registered credentials to login in the web app. After logging in, this should be the view you're seeing. (Login Feature)
+![image](https://user-images.githubusercontent.com/28770143/227702508-2fdf9346-1dfa-4c55-b016-68cf2f011148.png)
+
+
+#### 3. On the upper right corner, click the user icon and it would show you your email, and balance
+
+##### a. You have 2 actions as a user, which are Deposit Money and Add Item, depositing money would increase your balance and adding an Item, would add an item to your listing, let's try and add some money. Try clicking the Deposit Money
+![image](https://user-images.githubusercontent.com/28770143/227702652-be47094d-025b-4e95-9b03-17c957b7514d.png)
+
+##### b. Right now, you can input any amount of money, after inputting the desired amount, click Add Balance
+![image](https://user-images.githubusercontent.com/28770143/227702779-951bdcb7-6b11-4938-a47f-2dac909e9e36.png)
+
+##### c. Click the user icon again and see the amount you have now.
+![image](https://user-images.githubusercontent.com/28770143/227702817-9e3d78c0-f2be-47c3-820b-cc3f49df15f5.png)
+
+##### d. Try repeating the same step just to verify if the balance you have typed has added to your current balance.
+![image](https://user-images.githubusercontent.com/28770143/227702862-253565f0-723c-460d-bb02-4a3810335996.png)
+![image](https://user-images.githubusercontent.com/28770143/227702879-b7da1947-5846-45ef-809f-2ddb0eea526e.png)
+
+
+
+
+
+
+
+
+
+
 
 ### And coding style tests
 Explain what these tests test and why
