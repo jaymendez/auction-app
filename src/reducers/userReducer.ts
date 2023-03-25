@@ -1,3 +1,4 @@
+import { CreateLotProps } from "@/api/lot/createLot";
 import { ILot, IUser, TAuthUser } from "@/types";
 import { AxiosResponse } from "axios";
 import {
@@ -29,11 +30,19 @@ export type UserProviderState = {
     },
     unknown
   >;
-  refetchUser: unknown;
+  refetchUser?: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<AxiosResponse<any, any>, unknown>>;
   createLotMutation: UseMutateFunction<
-    AxiosResponse<any, any> | never[],
+    AxiosResponse<any, any>,
     unknown,
-    Omit<ILot, "status" | "bids" | "_id">,
+    CreateLotProps,
+    unknown
+  >;
+  updateLotMutation: UseMutateFunction<
+    AxiosResponse<any, any>,
+    unknown,
+    Partial<ILot>,
     unknown
   >;
   refetchLots?: <TPageData>(
@@ -49,8 +58,9 @@ export const userInitialState: UserProviderState = {
   logoutMutation: () => null,
   registerMutation: () => null,
   updateUserMutation: () => null,
-  refetchUser: () => null,
+  refetchUser: undefined,
   createLotMutation: () => null,
+  updateLotMutation: () => null,
   refetchLots: undefined,
   setRefetchLots: (fn: any) => null,
 };

@@ -41,13 +41,22 @@ export default function UserMenu(props: IUserMenuProps) {
               Balance: <span className="font-normal">${user?.moneyAmount}</span>
             </span>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => toggleBalanceModal(true)}>
-            <span className="dark:text-slate-200 text-slate-900">
-              Add Balance
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={() => toggleBalanceModal(true)}
+            className="cursor-pointer"
+          >
+            <span className="dark:text-slate-200 text-slate-900 font-normal">
+              Deposit Money
             </span>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => toggleItemModal(true)}>
-            <span className="dark:text-slate-200 text-slate-900">Add Item</span>
+          <DropdownMenuItem
+            onClick={() => toggleItemModal(true)}
+            className="cursor-pointer"
+          >
+            <span className="dark:text-slate-200 text-slate-900 font-normal">
+              Add Item
+            </span>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="p-0.5 justify-center items-center focus:!bg-transparent">

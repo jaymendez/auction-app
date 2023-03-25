@@ -2,6 +2,7 @@ import { useCallback, useEffect, useReducer } from "react";
 import { useMutation, useQuery } from "react-query";
 
 import createLot from "@/api/lot/createLot";
+import updateLot from "@/api/lot/updateLot";
 import createUser from "@/api/user/createUser";
 import fetchCurrentUser from "@/api/user/fetchCurrentUser";
 import login from "@/api/user/login";
@@ -44,11 +45,8 @@ export const useUser = (): UserProviderState => {
     onSuccess: () => refetchUser(),
   });
 
-  const { mutate: createLotMutation } = useMutation(createLot, {
-    onSuccess: () => {
-      state.refetchLots?.();
-    },
-  });
+  const { mutate: createLotMutation } = useMutation(createLot);
+  const { mutate: updateLotMutation } = useMutation(updateLot);
 
   const setUser = useCallback((newUser: any) => {
     dispatch({
@@ -85,6 +83,7 @@ export const useUser = (): UserProviderState => {
     updateUserMutation,
     refetchUser,
     createLotMutation,
+    updateLotMutation,
     setRefetchLots,
     setUser,
   };

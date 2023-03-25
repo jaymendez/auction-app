@@ -1,7 +1,3 @@
-import fetchLots from "@/api/lot/fetchLots";
-import { useUserContext } from "@/context/UserContext";
-import { ILot } from "@/types";
-import { getCurrentPrice } from "@/utils/bid";
 import {
   DataGrid,
   GridColDef,
@@ -9,21 +5,35 @@ import {
   GridValueGetterParams,
 } from "@mui/x-data-grid";
 import { isEmpty } from "lodash";
+import moment from "moment";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+
+import fetchLots from "@/api/lot/fetchLots";
+import { useUserContext } from "@/context/UserContext";
+import { ILot } from "@/types";
+import { getCurrentPrice } from "@/utils/bid";
+
 import AddBidModal from "../AddBidModal";
-import { Button } from "../Button";
+import AddItemModal from "../AddItemModal";
+import RowActions from "./RowActions";
+import { TFilterValue } from "./Toolbar";
+
+const momentDurationFormatSetup = require("moment-duration-format");
 
 export interface ILotTableProps {
-  filter?: any;
+  filter: TFilterValue;
 }
 
-export default function LotTable({ filter = {} }: ILotTableProps) {
+momentDurationFormatSetup(moment);
+
+export default function LotTable({ filter }: ILotTableProps) {
   const { theme: applicationTheme } = useTheme();
   const { user, setRefetchLots } = useUserContext();
 
   const [isBidModalOpen, toggleBidModal] = useState(false);
+  const [isItemModalOpen, toggleItemModal] = useState(false);
   const [selectedRow, setSelectedRow] = useState<ILot>();
 
   const {
@@ -72,10 +82,22 @@ export default function LotTable({ filter = {} }: ILotTableProps) {
       headerName: "Duration",
       flex: 1,
       maxWidth: 270,
-      valueGetter: (params: GridValueGetterParams) =>
-        `${params.row?.auctionTime?.startTime || ""} ${
-          params.row.lastName || ""
-        }`,
+      valueGetter: (params: GridValueGetterParams) => {
+        const { startTime, endTime } = params.row?.auctionTime ?? {
+          startTime: "",
+          endTime: "",
+        };
+        if (startTime && endTime) {
+          // if (endDate?.diff(startDate) <= 0) {
+          if (moment(endTime).diff(moment()) > 0) {
+            return `${moment
+              .duration(moment(endTime).diff(moment()))
+              .format("d [days] h [hrs], m [min]")}`;
+          }
+          return "Bidding Finished";
+        }
+        return "";
+      },
     },
     {
       field: "action",
@@ -87,27 +109,20 @@ export default function LotTable({ filter = {} }: ILotTableProps) {
         if (!user) {
           return "";
         }
-        if (filter.fetchType === "personal") {
-          return (
-            <Button
-              onClick={() => {
-                toggleBidModal(true);
-                setSelectedRow({ ...params.row });
-              }}
-            >
-              Publish Item
-            </Button>
-          );
-        }
         return (
-          <Button
-            onClick={() => {
+          <RowActions
+            filter={filter}
+            row={params.row}
+            refetch={refetch}
+            openItemModal={() => {
+              toggleItemModal(true);
+              setSelectedRow({ ...params.row });
+            }}
+            openBidModal={() => {
               toggleBidModal(true);
               setSelectedRow({ ...params.row });
             }}
-          >
-            Add Bid
-          </Button>
+          />
         );
       },
     },
@@ -155,6 +170,13 @@ export default function LotTable({ filter = {} }: ILotTableProps) {
           toggleModal={toggleBidModal}
           refetchLots={refetch}
           // item={rows.find((row: any) => row.id === selectedRow)}
+          item={selectedRow}
+        />
+      )}
+      {isItemModalOpen && (
+        <AddItemModal
+          isOpen={isItemModalOpen}
+          toggleModal={toggleItemModal}
           item={selectedRow}
         />
       )}

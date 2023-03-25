@@ -1,23 +1,21 @@
 import axios from "@/lib/axios";
 import { ILot } from "@/types";
 
-const createLot = async ({
-  name,
-  startingPrice,
-  auctionTime,
-  userId,
-}: Omit<ILot, "bids" | "status" | "_id">) => {
+export type CreateLotProps = Omit<
+  ILot,
+  "auctionTime" | "bids" | "status" | "_id"
+>;
+
+const createLot = async ({ name, startingPrice, userId }: CreateLotProps) => {
   try {
     const res = await axios.post(`/lots`, {
       name,
       startingPrice,
-      auctionTime,
       userId,
     });
     return res;
   } catch (err: any) {
-    if (err?.message === "Request failed with status code 404") return [];
-    throw new Error(err?.toString());
+    throw err?.response?.data?.message || "Error Encountered.";
   }
 };
 

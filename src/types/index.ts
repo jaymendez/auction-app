@@ -13,8 +13,15 @@ export interface ILot {
   userId: string;
   bids: TTransaction[];
   startingPrice: number;
-  status: string;
+  status: ELotStatus;
   auctionTime: AuctionTime;
+}
+
+export enum ELotStatus {
+  DRAFT = "draft",
+  PUBLISHED = "published",
+  ONGOING = "ongoing",
+  COMPLETED = "completed",
 }
 
 export type TTransaction = {

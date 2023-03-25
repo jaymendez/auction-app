@@ -8,7 +8,7 @@ interface Props {
   children: ReactElement;
 }
 
-export const UserContextProvider: any = ({ children }: Props) => {
+export const UserContextProvider = ({ children }: Props) => {
   const userProviderState = useUser();
 
   return (

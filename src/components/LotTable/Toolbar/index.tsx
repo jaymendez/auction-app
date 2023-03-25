@@ -1,29 +1,75 @@
 import { useUserContext } from "@/context/UserContext";
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
 import { isEmpty } from "lodash";
 
-type TableToolbarProps = {
-  value: string;
-  handleChange: any;
+export type TFilterValue = {
+  fetchType: "all" | "personal";
+  status: "all" | "ongoing" | "completed";
 };
 
-const TableToolbar = ({ value, handleChange }: TableToolbarProps) => {
+type TableToolbarProps = {
+  value: TFilterValue;
+  handleToggleChange: (
+    event: React.MouseEvent<HTMLElement>,
+    value: TFilterValue["fetchType"]
+  ) => void;
+  handleDropdownChange: (
+    event: SelectChangeEvent<TFilterValue["status"]>,
+    child?: any
+  ) => void;
+};
+
+const TableToolbar = ({
+  value,
+  handleToggleChange,
+  handleDropdownChange,
+}: TableToolbarProps) => {
   const { user } = useUserContext();
 
   return (
-    <ToggleButtonGroup
-      color="primary"
-      value={value}
-      exclusive
-      onChange={handleChange}
-      aria-label="Platform"
-    >
-      <ToggleButton value="all">All</ToggleButton>
-      <ToggleButton value="personal" disabled={isEmpty(user)}>
-        My Listing
-      </ToggleButton>
-      =
-    </ToggleButtonGroup>
+    <div className="flex justify-between">
+      <>
+        <ToggleButtonGroup
+          color="primary"
+          value={value.fetchType}
+          exclusive
+          onChange={handleToggleChange}
+          aria-label="Platform"
+        >
+          <ToggleButton value="all">All</ToggleButton>
+          <ToggleButton value="personal" disabled={isEmpty(user)}>
+            My Listing
+          </ToggleButton>
+        </ToggleButtonGroup>
+
+        <FormControl
+          fullWidth
+          sx={{
+            maxWidth: "200px",
+          }}
+        >
+          <InputLabel id="status">Status</InputLabel>
+          <Select
+            id="status"
+            value={value.status}
+            label="Status"
+            onChange={handleDropdownChange}
+          >
+            <MenuItem value={"all"}>All</MenuItem>
+            <MenuItem value={"ongoing"}>Ongoing</MenuItem>
+            <MenuItem value={"completed"}>Completed</MenuItem>
+          </Select>
+        </FormControl>
+      </>
+    </div>
   );
 };
 

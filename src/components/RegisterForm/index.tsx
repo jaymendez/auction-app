@@ -114,7 +114,8 @@ const RegisterForm = ({
         {/* <InputError messages={errors?.password_confirmation} className="mt-2" /> */}
       </div>
       <FormErrors errors={errors} />
-      <div className="mt-4 flex items-center justify-end">
+      <div className="mt-4 flex items-center flex-row-reverse">
+        <Button type="submit">Register</Button>
         <Button
           variant="link"
           onClick={() => {
@@ -124,8 +125,6 @@ const RegisterForm = ({
         >
           Already registered?
         </Button>
-
-        <Button type="submit">Register</Button>
       </div>
     </form>
   );

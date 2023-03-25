@@ -60,7 +60,6 @@ const Login = ({ toggleLogin, toggleRegisterForm }: LoginFormProps) => {
             className="mt-1 block w-full"
             onChange={(event) => setEmail(event.target.value)}
             required
-            autoFocus
           />
 
           {/* <InputError messages={errors?.email} className="mt-2" /> */}
@@ -85,7 +84,10 @@ const Login = ({ toggleLogin, toggleRegisterForm }: LoginFormProps) => {
           {/* <InputError messages={errors?.password} className="mt-2" /> */}
         </div>
         <FormErrors errors={errors} />
-        <div className="mt-4 flex items-center justify-end space-x-3">
+        <div className="mt-4 flex items-center  space-x-3 flex-row-reverse">
+          <Button variant="default" type="submit" autoFocus>
+            Login
+          </Button>
           <Button
             variant="link"
             onClick={() => {
@@ -94,10 +96,6 @@ const Login = ({ toggleLogin, toggleRegisterForm }: LoginFormProps) => {
             }}
           >
             Register
-          </Button>
-
-          <Button variant="default" type="submit">
-            Login
           </Button>
         </div>
       </form>

@@ -1,13 +1,12 @@
 import axios from "@/lib/axios";
 import { ILot } from "@/types";
 
-const updateLot = async (body: ILot) => {
+const updateLot = async (body: Partial<ILot>) => {
   try {
     const res = await axios.put(`/lots/${body._id}`, body);
     return res;
   } catch (err: any) {
-    if (err?.message === "Request failed with status code 404") return [];
-    throw new Error(err?.toString());
+    throw err?.response?.data?.message || "Error Encountered.";
   }
 };
 

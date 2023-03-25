@@ -1,7 +1,3 @@
-import AddBidToLot from "@/api/lot/addBidToLot";
-import { useUserContext } from "@/context/UserContext";
-import { ILot, ModalProps } from "@/types";
-import { getActiveBid, getCurrentPrice } from "@/utils/bid";
 import { isEmpty } from "lodash";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
@@ -10,6 +6,12 @@ import {
   RefetchQueryFilters,
   useMutation,
 } from "react-query";
+
+import AddBidToLot from "@/api/lot/addBidToLot";
+import { useUserContext } from "@/context/UserContext";
+import { ILot, ModalProps } from "@/types";
+import { getActiveBid, getCurrentPrice } from "@/utils/bid";
+
 import { Button } from "../Button";
 import CustomModal from "../CustomModal";
 import FormErrors from "../FormErrors";
@@ -32,11 +34,12 @@ const AddBidModal = ({
 }: AddBidModalProps) => {
   const [bidValue, setBidValue] = useState<number | string>(0);
   const [errors, setErrors] = useState<string[]>([]);
-  const { user } = useUserContext();
+  const { user, refetchUser } = useUserContext();
 
   const { mutate } = useMutation(AddBidToLot, {
     onSuccess: () => {
       refetchLots();
+      refetchUser?.();
       toast({
         title: "Successful bid!! 🎉",
         message: `Item ${item?.name} has your bid.`,
@@ -45,6 +48,13 @@ const AddBidModal = ({
       setBidValue(0);
       toggleModal(false);
     },
+    onError: (error) =>
+      setErrors((prev) => {
+        if (prev.includes(error as string)) {
+          return prev;
+        }
+        return [...prev, error as string];
+      }),
   });
 
   const addBid = useCallback(() => {
@@ -82,7 +92,17 @@ const AddBidModal = ({
       return;
     }
     if (item) {
-      if (bidValue <= getCurrentPrice(item) || isEmpty(bidValue)) {
+      console.log(bidValue);
+      console.log(getCurrentPrice(item));
+      console.log(
+        bidValue <= getCurrentPrice(item),
+        isEmpty(bidValue),
+        bidValue
+      );
+      if (
+        bidValue <= getCurrentPrice(item) ||
+        (typeof bidValue === "string" && isEmpty(bidValue))
+      ) {
         const valError = "Your bid should be greater than the current price";
         setErrors((prev) => {
           if (prev.includes(valError)) {
@@ -98,7 +118,7 @@ const AddBidModal = ({
 
   useEffect(() => {
     validateForm();
-  }, [validateForm]);
+  }, [validateForm, bidValue]);
 
   return (
     <CustomModal
@@ -107,13 +127,22 @@ const AddBidModal = ({
       cardSx={{ maxWidth: "450px" }}
     >
       <div className="space-y-4 flex flex-col">
-        <h3 className="text-lg">Bid {item?.name}</h3>
+        {item && (
+          <div>
+            <h3 className="text-xl break-words text-stone-900 text-s dark:text-stone-100">
+              Bid {item.name}
+            </h3>
+            <h3 className="text-md text-stone-900 dark:text-stone-100">
+              Current Price: ${getCurrentPrice(item)}
+            </h3>
+          </div>
+        )}
         <div className="space-y-1.5">
           <Label htmlFor="bidValue" className="flex">
             Bid Price
           </Label>
-
           <Input
+            step={5}
             name="bidValue"
             type="number"
             value={bidValue}

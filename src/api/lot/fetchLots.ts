@@ -2,8 +2,8 @@ import axios from "@/lib/axios";
 
 const fetchLots = async (props: any) => {
   try {
-    let params = {};
     const [user, filter] = props.queryKey;
+    let params: any = { status: filter.status };
 
     if (filter.fetchType === "personal") {
       params = {
@@ -14,8 +14,7 @@ const fetchLots = async (props: any) => {
     const res = await axios.get(`/lots`, { params });
     return res;
   } catch (err: any) {
-    if (err?.message === "Request failed with status code 404") return [];
-    throw new Error(err?.toString());
+    throw err?.response?.data?.message || "Error Encountered.";
   }
 };
 

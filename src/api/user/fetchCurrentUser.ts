@@ -6,7 +6,7 @@ const fetchCurrentUser = async (): Promise<AxiosResponse<any, any>> => {
     const res = await axios.get(`/whoami`);
     return res;
   } catch (err: any) {
-    throw new Error(err?.toString());
+    throw err?.response?.data?.message || "Error Encountered.";
   }
 };
 

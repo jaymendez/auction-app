@@ -1,8 +1,8 @@
 import LotTable from "@/components/LotTable";
-import TableToolbar from "@/components/LotTable/Toolbar";
+import TableToolbar, { TFilterValue } from "@/components/LotTable/Toolbar";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { useTheme } from "next-themes";
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 
 const HomeView = () => {
   const { theme: applicationTheme } = useTheme();
@@ -11,15 +11,21 @@ const HomeView = () => {
       mode: applicationTheme === "light" ? "light" : "dark",
     },
   });
-  const [filter, setFilter] = useState<any>({ fetchType: "all" });
+  const [filter, setFilter] = useState<TFilterValue>({
+    fetchType: "all",
+    status: "all",
+  });
 
   return (
     <div className="container mt-20 space-y-10">
       <ThemeProvider theme={darkTheme}>
         <TableToolbar
-          value={filter.fetchType}
-          handleChange={(_: MouseEvent<HTMLElement>, value: string) =>
-            setFilter((prev: any) => ({ ...prev, fetchType: value }))
+          value={filter}
+          handleToggleChange={(_, value) =>
+            setFilter((prev) => ({ ...prev, fetchType: value }))
+          }
+          handleDropdownChange={(event) =>
+            setFilter((prev: any) => ({ ...prev, status: event.target.value }))
           }
         />
         <LotTable filter={filter} />

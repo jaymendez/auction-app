@@ -12,8 +12,7 @@ const updateUser = async ({
     const res = await axios.put(`/users/${userId}`, body);
     return res;
   } catch (err: any) {
-    if (err?.message === "Request failed with status code 404") return [];
-    throw new Error(err?.toString());
+    throw err?.response?.data?.message || "Error Encountered.";
   }
 };
 

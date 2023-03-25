@@ -9,7 +9,7 @@ const createUser = async ({ email, password }: TAuthUser) => {
     });
     return res;
   } catch (err: any) {
-    throw err?.response?.data?.message || "Invalid Login Credentials";
+    throw err?.response?.data?.message || "Error Encountered.";
   }
 };
 
