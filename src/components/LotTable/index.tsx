@@ -55,13 +55,14 @@ export default function LotTable({ filter }: ILotTableProps) {
       field: "name",
       headerName: "Name",
       flex: 1,
-      minWidth: 300,
+      minWidth: 200,
       maxWidth: 400,
     },
     {
       field: "status",
       headerName: "Status",
       flex: 1,
+      minWidth: 100,
       maxWidth: 270,
       renderCell: (params) => {
         return <span className="capitalize">{params?.value}</span>;
@@ -71,6 +72,7 @@ export default function LotTable({ filter }: ILotTableProps) {
       field: "startingPrice",
       headerName: "Current Price",
       flex: 1,
+      minWidth: 100,
       maxWidth: 270,
       valueGetter: (params: GridValueGetterParams) => {
         const price = getCurrentPrice(params.row);
@@ -81,6 +83,7 @@ export default function LotTable({ filter }: ILotTableProps) {
       field: "time",
       headerName: "Duration",
       flex: 1,
+      minWidth: 100,
       maxWidth: 270,
       valueGetter: (params: GridValueGetterParams) => {
         const { startTime, endTime } = params.row?.auctionTime ?? {
@@ -105,6 +108,7 @@ export default function LotTable({ filter }: ILotTableProps) {
       sortable: false,
       flex: 1,
       hideSortIcons: true,
+      minWidth: 150,
       renderCell: (params) => {
         if (!user) {
           return "";

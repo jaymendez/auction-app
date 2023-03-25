@@ -17,7 +17,7 @@ const HomeView = () => {
   });
 
   return (
-    <div className="container mt-20 space-y-10">
+    <div className="container pt-20 space-y-10">
       <ThemeProvider theme={darkTheme}>
         <TableToolbar
           value={filter}

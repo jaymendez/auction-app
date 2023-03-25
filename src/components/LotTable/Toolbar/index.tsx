@@ -35,7 +35,7 @@ const TableToolbar = ({
   const { user } = useUserContext();
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between md:flex-row flex-col gap-5 md:items-center items-end">
       <>
         <ToggleButtonGroup
           color="primary"
