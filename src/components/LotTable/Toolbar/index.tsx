@@ -8,7 +8,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 
 export type TFilterValue = {
   fetchType: "all" | "personal";

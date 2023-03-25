@@ -4,7 +4,7 @@ import {
   GridColumnHeaderParams,
   GridValueGetterParams,
 } from "@mui/x-data-grid";
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 import moment from "moment";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";

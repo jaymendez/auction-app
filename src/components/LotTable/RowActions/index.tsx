@@ -5,7 +5,7 @@ import { useUserContext } from "@/context/UserContext";
 import { ILot } from "@/types";
 import { getActiveBid } from "@/utils/bid";
 import { Tooltip } from "@mui/material";
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 import moment from "moment";
 import {
   QueryObserverResult,

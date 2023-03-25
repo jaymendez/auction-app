@@ -8,7 +8,7 @@ import { FormEvent, useCallback, useEffect, useState } from "react";
 
 import { useUserContext } from "@/context/UserContext";
 import { ELotStatus, ILot, ModalProps } from "@/types";
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 import { Button } from "../Button";
 import CustomModal from "../CustomModal";
 import FormErrors from "../FormErrors";

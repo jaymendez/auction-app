@@ -94,7 +94,7 @@ const AddBidModal = ({
     if (item) {
       if (
         (typeof bidValue === "string" && isEmpty(bidValue)) ||
-        bidValue <= getCurrentPrice(item)
+        (typeof bidValue === "number" && bidValue <= getCurrentPrice(item))
       ) {
         const valError = "Your bid should be greater than the current price";
         setErrors((prev) => {

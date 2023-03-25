@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 import { AlertCircle } from "lucide-react";
 
 interface IFormErrorsProps {
