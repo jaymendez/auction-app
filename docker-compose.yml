@@ -1,0 +1,12 @@
+version: "3.8"
+services: 
+  next-react:
+    build:
+      context: .
+    volumes:
+      - .:/auction-app
+    ports:
+      - "3000:3000"
+    image: app:react
+    container_name: auction.local
+    command: yarn dev
