@@ -1,7 +1,10 @@
 # Auction App
 
 <div align="center">
+
   <h2>🔥 nextjs-auction-app </h2>
+  ![image](https://user-images.githubusercontent.com/28770143/227749622-c10052b1-d5aa-45b6-b7e7-9ce02e28a708.png)
+
   <p> LIVE DEMO: https://auction-app-jaymendez.vercel.app/ </p>
   <p>an Auction App made with Next.js, Typescript and Tailwind</p>
   <p>Backend was made with Node.js, Express, Typescript and MongoDB</p>
@@ -65,6 +68,61 @@ Some of the drawbacks of this auction system because it is built with an MVC-lik
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
 ### Prerequisites
+You can install the app in 2 different ways. You can do it through docker or manual installation. Manual installation would need you to install different softwares in order to run the app, while with docker, you would just need docker and git. </br></br>
+
+**Docker is the preferred method to run projects locally! This (should) avoid the _but it works on my machine_ problem.**
+
+But if you're using Windows, I highly recommend that you should use manual installation as i didn't test this app with docker and WSL yet.
+
+### Installing
+
+#### Docker Installation
+
+What things you need to install the software and how to install them.
+
+```
+docker desktop
+git
+```
+
+#### 1. If you have downloaded git, clone the project. You can also download the zip if you don't want to install git.
+```
+git clone https://github.com/jaymendez/auction-app.git
+```
+![image](https://user-images.githubusercontent.com/28770143/227701654-273a6037-d25b-40af-b58a-804e33c75b73.png)
+
+
+#### 2. You would need to install docker desktop based on your Operating system, you can use this guides on how to install them. 
+##### Mac
+https://docs.docker.com/desktop/install/mac-install/
+##### Linux
+https://docs.docker.com/desktop/install/linux-install/
+
+#### 3. Rename the file sample.env to .env
+
+#### 4. On the terminal, go to your project directory, and run these commands. It may take 2 - 5 minutes to get it running as it's installing the dependencies of the project.
+
+```
+sudo docker-compose build
+sudo docker-compose up
+```
+
+#### 5. If you got the docker running, open http://localhost:3000 with your browser to see the result. This should be the app that you're seeing in your browser:
+```
+http://localhost:3000
+```
+
+![image](https://user-images.githubusercontent.com/28770143/227701984-c25cf085-267a-4f37-aa22-9612058b1fe1.png)
+
+#### 6. You would have to do the same process on for this project as it needs a backend to run.
+```
+https://github.com/jaymendez/auction-api
+```
+
+---
+
+#### Manual Installation
+
 What things you need to install the software and how to install them.
 
 On any operating system:
@@ -76,7 +134,7 @@ terminal
 git
 ```
 
-### Installing
+
 A step by step series of examples that tell you how to get your development env running.
 
 #### 1. After installing the following softwares, run this command on your terminal
