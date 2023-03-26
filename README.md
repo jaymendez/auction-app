@@ -1,7 +1,7 @@
-# Auction App
+
 
 <div align="center">
-  <h2>🔥 nextjs-auction-app </h2>
+  <h2>Auction App 💳</h2>
 
   <img src="https://user-images.githubusercontent.com/28770143/227749718-6bf6ea6d-a0ff-46f5-b4d2-c14e20bafc9d.png" />
   <p> LIVE DEMO: https://auction-app-jaymendez.vercel.app/ </p>
