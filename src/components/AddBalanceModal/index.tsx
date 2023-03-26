@@ -15,12 +15,12 @@ const AddBalanceModal = ({ isOpen, toggleModal }: AddBalanceModalProps) => {
 
   const addBalance = useCallback(() => {
     updateUserMutation({
-      userId: user._id,
-      body: { moneyAmount: balance + user.moneyAmount },
+      userId: user?._id,
+      body: { moneyAmount: balance + (user?.moneyAmount || 0) },
     });
     toast({
       title: "Successful cash in!! 🎉",
-      message: `Your new balance is $${user.moneyAmount + balance}.`,
+      message: `Your new balance is $${(user?.moneyAmount || 0) + balance}.`,
       type: "success",
     });
     setBalance(0);

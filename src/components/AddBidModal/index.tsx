@@ -62,7 +62,7 @@ const AddBidModal = ({
       mutate({
         lotId: item._id,
         body: {
-          userId: user._id,
+          userId: user?._id,
           lotId: item._id,
           transactionAmount: bidValue,
         },
@@ -72,7 +72,7 @@ const AddBidModal = ({
 
   const isTheActiveBidder = useMemo(() => {
     if (item) {
-      if (getActiveBid(item)?.userId === user._id) {
+      if (getActiveBid(item)?.userId === user?._id) {
         return true;
       }
       return false;

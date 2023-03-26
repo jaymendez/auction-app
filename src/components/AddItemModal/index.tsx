@@ -81,7 +81,7 @@ const AddItemModal = ({ isOpen, toggleModal, item }: AddItemModalProps) => {
         createLotMutation(
           {
             name: name.value,
-            userId: user._id,
+            userId: user?._id,
             startingPrice: parseFloat(startingPrice.value),
           },
           {

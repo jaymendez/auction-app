@@ -35,7 +35,7 @@ export default function RowActions({
   openItemModal,
   openBidModal,
 }: IRowActionsProps) {
-  const { user } = useUserContext();
+  const { user, refetchUser } = useUserContext();
   const { auctionTime, status, userId, name } = row;
   const activeBid = getActiveBid(row);
   const { endTime } = auctionTime ?? {
@@ -51,6 +51,7 @@ export default function RowActions({
       {
         onSuccess: () => {
           refetch();
+          refetchUser?.();
           toast({
             title: "Congratulations!! 🎉",
             message: `You have successfully sold ${name}.`,
@@ -100,7 +101,7 @@ export default function RowActions({
       {status !== "completed" && (
         <Tooltip
           title={
-            userId === user._id
+            userId === user?._id
               ? `You can't bid on your own item`
               : "Add bid to the item!"
           }
@@ -109,7 +110,7 @@ export default function RowActions({
             <Button
               className="font-semibold"
               onClick={() => openBidModal()}
-              disabled={userId === user._id}
+              disabled={userId === user?._id}
             >
               Add Bid
             </Button>

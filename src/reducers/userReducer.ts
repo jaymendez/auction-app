@@ -16,7 +16,7 @@ type TAuthMutation = UseMutateFunction<
 >;
 
 export type UserProviderState = {
-  user: any; // Add user type
+  user: IUser | null; // Add user type
   setUser: (newUser: any) => void;
   loginMutation: TAuthMutation;
   logoutMutation: TAuthMutation;

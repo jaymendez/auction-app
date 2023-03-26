@@ -26,7 +26,7 @@ export default function UserMenu(props: IUserMenuProps) {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm">
-            <User className="rotate-90 transition-all hover:text-slate-900 dark:rotate-0  dark:text-slate-400 dark:hover:text-slate-100" />
+            <User className="transition-all hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100" />
             <span className="sr-only">User</span>
           </Button>
         </DropdownMenuTrigger>
