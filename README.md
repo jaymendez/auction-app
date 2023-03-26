@@ -230,7 +230,7 @@ See the updated balance </br>
 I will describe the basic feature of the app in this section.
 
 #### When you access the page unauthenticated, you would be able to see
-  1. a **Table** for the listing of items, it can be filtered by Status and Listing, **My Listing** is disabled as you are not logged in, it also has pagination implemented.
+  1. a **Table** for the listing of items, it can be filtered by Status (All, Ongoing, Completed) and Listing, **My Listing** is disabled as you are not logged in, it also has pagination implemented.
   2. On the top right corner, you have **Sign In** button and a toggle between dark mode and light mode
 ![image](https://user-images.githubusercontent.com/28770143/227750211-9abacd40-39d3-4e75-ba32-91f244e36efe.png)
 
