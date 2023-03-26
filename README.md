@@ -1,10 +1,9 @@
 # Auction App
 
 <div align="center">
-
   <h2>🔥 nextjs-auction-app </h2>
-  ![image](https://user-images.githubusercontent.com/28770143/227749622-c10052b1-d5aa-45b6-b7e7-9ce02e28a708.png)
 
+  <img src="https://user-images.githubusercontent.com/28770143/227749718-6bf6ea6d-a0ff-46f5-b4d2-c14e20bafc9d.png" />
   <p> LIVE DEMO: https://auction-app-jaymendez.vercel.app/ </p>
   <p>an Auction App made with Next.js, Typescript and Tailwind</p>
   <p>Backend was made with Node.js, Express, Typescript and MongoDB</p>
@@ -23,13 +22,11 @@
 - [Problem Statement](#problem_statement)
 - [Idea / Solution](#idea)
 - [Getting Started](#getting_started)
-- [Deployment](#deployment)
 - [Usage](#usage)
 - [Built Using](#built_using)
 - [TODO](../TODO.md)
 - [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
 
 ## 🧐 Problem Statement <a name = "problem_statement"></a>
 The product that we are building is an online auction system
@@ -85,36 +82,36 @@ docker desktop
 git
 ```
 
-#### 1. If you have downloaded git, clone the project. You can also download the zip if you don't want to install git.
+##### 1. If you have downloaded git, clone the project. You can also download the zip if you don't want to install git.
 ```
 git clone https://github.com/jaymendez/auction-app.git
 ```
 ![image](https://user-images.githubusercontent.com/28770143/227701654-273a6037-d25b-40af-b58a-804e33c75b73.png)
 
 
-#### 2. You would need to install docker desktop based on your Operating system, you can use this guides on how to install them. 
+##### 2. You would need to install docker desktop based on your Operating system, you can use this guides on how to install them. 
 ##### Mac
 https://docs.docker.com/desktop/install/mac-install/
 ##### Linux
 https://docs.docker.com/desktop/install/linux-install/
 
-#### 3. Rename the file sample.env to .env
+##### 3. Rename the file sample.env to .env
 
-#### 4. On the terminal, go to your project directory, and run these commands. It may take 2 - 5 minutes to get it running as it's installing the dependencies of the project.
+##### 4. On the terminal, go to your project directory, and run these commands. It may take 2 - 5 minutes to get it running as it's installing the dependencies of the project.
 
 ```
 sudo docker-compose build
 sudo docker-compose up
 ```
 
-#### 5. If you got the docker running, open http://localhost:3000 with your browser to see the result. This should be the app that you're seeing in your browser:
+##### 5. If you got the docker running, open http://localhost:3000 with your browser to see the result. This should be the app that you're seeing in your browser:
 ```
 http://localhost:3000
 ```
 
 ![image](https://user-images.githubusercontent.com/28770143/227701984-c25cf085-267a-4f37-aa22-9612058b1fe1.png)
 
-#### 6. You would have to do the same process on for this project as it needs a backend to run.
+##### 6. You would have to do the same process on for this project as it needs a backend to run.
 ```
 https://github.com/jaymendez/auction-api
 ```
@@ -137,32 +134,32 @@ git
 
 A step by step series of examples that tell you how to get your development env running.
 
-#### 1. After installing the following softwares, run this command on your terminal
+##### 1. After installing the following softwares, run this command on your terminal
 ```
 npm install --global yarn
 ```
 
-#### 2. Clone or download the zip of the project
+##### 2. Clone or download the zip of the project
 ```
 git clone https://github.com/jaymendez/auction-app.git
 ```
 ![image](https://user-images.githubusercontent.com/28770143/227701654-273a6037-d25b-40af-b58a-804e33c75b73.png)
 
 
-#### 3. On your terminal, navigate to the directory of your project then run these commands, this will install the dependencies you need in order to run the project.
+##### 3. On your terminal, navigate to the directory of your project then run these commands, this will install the dependencies you need in order to run the project.
 ```
 cd auction-app && yarn
 ```
 
-#### 4. Rename the file sample.env to .env
+##### 4. Rename the file sample.env to .env
 
-#### 5. Run the development server
+##### 5. Run the development server
 ```
 npm run dev
 ```
 Open http://localhost:3000 with your browser to see the result.
 
-#### 6. You would have to do the same process on for this project as it needs a backend to run.
+##### 6. You would have to do the same process on for this project as it needs a backend to run.
 ```
 https://github.com/jaymendez/auction-api
 ```
@@ -179,16 +176,16 @@ yarn test
 ```
 
 ### End to end test for user
-If you managed to install the frontend, backend and created your mongodb instance, you can now try and test the web app.
+If you managed to install the frontend, backend and created your mongodb instance, you can now try and test the web app, you can skip this part and proceed to [Usage](#usage), for the general features of the app
 
-#### 1. Start by registering an account, click the Sign In button on the upper right corner and then click Register on the modal. We are testing the register functionality here.
+##### 1. Start by registering an account, click the Sign In button on the upper right corner and then click Register on the modal. We are testing the register functionality here.
 ![image](https://user-images.githubusercontent.com/28770143/227702396-9880da0b-3514-4cc2-b826-fb066dbf6338.png)
 
-#### 2. User your registered credentials to login in the web app. After logging in, this should be the view you're seeing. (Login Feature)
+##### 2. User your registered credentials to login in the web app. After logging in, this should be the view you're seeing. (Login Feature)
 ![image](https://user-images.githubusercontent.com/28770143/227702508-2fdf9346-1dfa-4c55-b016-68cf2f011148.png)
 
 
-#### 3. On the upper right corner, click the user icon and it would show you your email, and balance
+##### 3. On the upper right corner, click the user icon and it would show you your email, and balance
 
 ##### a. You have 2 actions as a user, which are Deposit Money and Add Item, depositing money would increase your balance and adding an Item, would add an item to your listing, let's try and add some money. Try clicking the Deposit Money
 ![image](https://user-images.githubusercontent.com/28770143/227702652-be47094d-025b-4e95-9b03-17c957b7514d.png)
@@ -204,45 +201,54 @@ If you managed to install the frontend, backend and created your mongodb instanc
 ![image](https://user-images.githubusercontent.com/28770143/227702879-b7da1947-5846-45ef-809f-2ddb0eea526e.png)
 
 
-#### 4. Next would be creating an Item, on the same dropdown, click Add Item, a modal would pop up and you would need to fill up these fields. 
+##### 4. Next would be creating an Item, on the same dropdown, click Add Item, a modal would pop up and you would need to fill up these fields. 
 ![image](https://user-images.githubusercontent.com/28770143/227706133-85ded695-bbfe-46fc-9a84-cd77809f87b5.png)
 
+##### 5. After creating an item, you can go change the filter on the table to My Listing so that you could see your item, newly created items are in the draft status so you would need to publish them in order for other people to see your listings.
+![image](https://user-images.githubusercontent.com/28770143/227749820-8b9acccd-a30d-4f6a-be3a-c067ff338885.png)
 
+##### 6. You can click on Publish Item in order to show them to other people, you would just have to fill up these fields. Currently, start date is defaulted to the time of publication, but you can manipulate End Date to determine on how long the item would be for Bidding.
+![image](https://user-images.githubusercontent.com/28770143/227749860-1f458045-c71d-49a4-97c1-2c263d61953c.png)
 
+##### 7. After publishing your item, other people can bid on your items. You would need to *create another account* in order to place your bid.
+![image](https://user-images.githubusercontent.com/28770143/227749879-ee7cb33b-b58a-4a00-af9b-a5e1e6ad6c84.png)
 
+##### 8. After you have Sign in on a different account, deposit money enough to bid on the item of your choosing, then click add bid on that item.
+![image](https://user-images.githubusercontent.com/28770143/227750116-0cea2b83-54d3-40fc-9c61-dbf03d88aafd.png)
 
+##### 9. The current price of the item would be updated based on the highest bidder.
+![image](https://user-images.githubusercontent.com/28770143/227750146-955f302f-68be-4012-a71d-3bcf64f8edea.png)
 
+##### 10. You can go back to your original account on where you created the item, and complete the bid. In doing so, the item would be transferred to the Bid Winner and you would have the Current Price value of the item on your account.
+![image](https://user-images.githubusercontent.com/28770143/227750178-96beed60-8338-47ea-acfe-0a997fe7ba3a.png)
 
+See the updated balance </br>
+![image](https://user-images.githubusercontent.com/28770143/227750190-4ad07b06-6d38-4d17-a8a1-63dff8dc304b.png)
 
-
-
-
-### And coding style tests
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## 🎈 Usage <a name="usage"></a>
-Add notes about how to use the system.
+I will describe the basic feature of the app in this section.
 
-## 🚀 Deployment <a name = "deployment"></a>
-Add additional notes about how to deploy this on a live system.
+#### When you access the page unauthenticated, you would be able to see
+  1. a **Table** for the listing of items, it can be filtered by Status and Listing, **My Listing** is disabled as you are not logged in.
+  2. On the top right corner, you have **Sign In** button and a toggle between dark mode and light mode
+![image](https://user-images.githubusercontent.com/28770143/227750211-9abacd40-39d3-4e75-ba32-91f244e36efe.png)
+
+#### When you logged in the auction app, you would be able to see
+  1. Your own listing is now enabled on the filter, you would be able to Publish Items and Complete Bids on this section
+  2. On the top right corner, you can **Deposit Money** and **Add Item**, the **Sign Out** button is also in this section
+  
+![image](https://user-images.githubusercontent.com/28770143/227750321-9f812f50-8ebd-4e15-a7a7-aeb134ac205a.png)
+
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 - [MongoDB](https://www.mongodb.com/) - Database
 - [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
+- [NextJs](https://nextjs.org/) - React Web Framework
 - [NodeJs](https://nodejs.org/en/) - Server Environment
+- [TypeScript](https://www.typescriptlang.org/) - Programming Language
 
 ## ✍️ Authors <a name = "authors"></a>
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
+- [@jaymendez](https://github.com/jaymendez) - Idea & Coding work
 
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
-
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
 
