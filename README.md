@@ -22,10 +22,8 @@
 - [Problem Statement](#problem_statement)
 - [Idea / Solution](#idea)
 - [Getting Started](#getting_started)
-- [Usage](#usage)
+- [Running the Tests](#tests)
 - [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
 
 ## 🧐 Problem Statement <a name = "problem_statement"></a>
