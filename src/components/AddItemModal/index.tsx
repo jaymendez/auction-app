@@ -45,7 +45,7 @@ const AddItemModal = ({ isOpen, toggleModal, item }: AddItemModalProps) => {
   const submitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { name, startingPrice } = e.target as typeof e.target & FormData;
-    if (errors.length === 0) {
+    if (errors.length === 0 && !isEmpty(user)) {
       if (item?._id) {
         // Update Query
         updateLotMutation(

@@ -12,6 +12,7 @@ import userReducer, {
   userInitialState,
   UserProviderState,
 } from "@/reducers/userReducer";
+import { IUser } from "@/types";
 
 export const useUser = (): UserProviderState => {
   const [state, dispatch] = useReducer(userReducer, userInitialState);
@@ -48,7 +49,10 @@ export const useUser = (): UserProviderState => {
   const { mutate: createLotMutation } = useMutation(createLot);
   const { mutate: updateLotMutation } = useMutation(updateLot);
 
-  const setUser = useCallback((newUser: any) => {
+  const setUser = useCallback((newUser: IUser | null) => {
+    if (typeof newUser?.moneyAmount === "string") {
+      newUser.moneyAmount = parseFloat(newUser.moneyAmount);
+    }
     dispatch({
       type: "SET_USER",
       user: newUser,

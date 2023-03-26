@@ -14,13 +14,18 @@ const AddBalanceModal = ({ isOpen, toggleModal }: AddBalanceModalProps) => {
   const { updateUserMutation, user } = useUserContext();
 
   const addBalance = useCallback(() => {
+    if (!user) {
+      return;
+    }
+    const parsedBalance =
+      typeof balance === "string" ? parseFloat(balance) : balance;
     updateUserMutation({
       userId: user?._id,
-      body: { moneyAmount: balance + (user?.moneyAmount || 0) },
+      body: { moneyAmount: parsedBalance + user.moneyAmount },
     });
     toast({
       title: "Successful cash in!! 🎉",
-      message: `Your new balance is $${(user?.moneyAmount || 0) + balance}.`,
+      message: `Your new balance is $${user.moneyAmount + parsedBalance}.`,
       type: "success",
     });
     setBalance(0);
