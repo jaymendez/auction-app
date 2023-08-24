@@ -7,7 +7,7 @@
   <p> LIVE DEMO: https://auction-app-jaymendez.vercel.app/ </p>
   <p>an Auction App made with Next.js, Typescript and Tailwind</p>
   <p>Backend was made with Node.js, Express, Typescript and MongoDB</p>
-  <p>Made by Jay Mendez 🔥</p>
+  <p>Made by Jay Mendez</p>
 </div>
 <div align="center">
 
